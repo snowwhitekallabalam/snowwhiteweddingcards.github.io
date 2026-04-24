@@ -1,113 +1,87 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Snow White Wedding Cards</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
-    color: white;
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#ffffff;
+  color:#333;
 }
 
 /* HEADER */
-header {
-    text-align: center;
-    padding: 30px 10px;
+header{
+  text-align:center;
+  padding:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+header img{
+  width:90px;
+  border-radius:50%;
 }
 
-header img {
-    width: 90px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
-header h1 {
-    margin: 10px 0 5px;
-    font-size: 26px;
-}
-
-header p {
-    color: #aaa;
+/* QUOTE */
+.quote{
+  text-align:center;
+  padding:10px;
+  color:#777;
+  font-style:italic;
 }
 
 /* GRID */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 15px;
-    padding: 20px;
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  padding:15px;
 }
 
 /* CARD */
-.card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.3s;
-    cursor: pointer;
+.card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  position:relative;
+  transition:.3s;
+}
+.card:hover{
+  transform:scale(1.03);
+}
+.card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
 }
 
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-}
-
-.card p {
-    text-align: center;
-    padding: 8px;
-    font-size: 14px;
+/* LIKE */
+.like{
+  position:absolute;
+  top:8px;
+  right:10px;
+  font-size:22px;
+  cursor:pointer;
 }
 
 /* VIEWER */
-.viewer {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+.viewer{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
 }
-
-.viewer img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-}
-
-/* CLOSE BUTTON */
-.closeBtn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-/* WHATSAPP BUTTON */
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    padding: 12px 18px;
-    border-radius: 30px;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+.viewer img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
 }
 </style>
 
@@ -116,15 +90,24 @@ header p {
 <body>
 
 <header>
-    <img src="pic.png">
-    <h1>Snow White Wedding Cards</h1>
-    <p>Kallambalam | 📞 +91 7012485280</p>
+<img src="pic.png">
+<h1>Snow White Wedding Cards</h1>
+<p>Kallambalam | 📞 +91 7012485280</p>
 </header>
 
-<div class="container">
+<div class="quote">
+“Two souls, one heart, one beautiful journey 💍”
+</div>
 
-<!-- IMAGES -->
+<div class="container" id="gallery"></div>
+
+<div class="viewer" id="viewer" onclick="closeImage()">
+<img id="viewerImg">
+</div>
+
 <script>
+
+/* 🔥 ADD YOUR IMAGES HERE */
 const images = [
 "IMG-20260424-WA0003.jpg",
 "IMG-20260424-WA0004.jpg",
@@ -137,41 +120,40 @@ const images = [
 "IMG-20260424-WA0021.jpg",
 "IMG-20260424-WA0024.jpg",
 "IMG-20260424-WA0027.jpg"
+
+/* 👉 new images ivide add cheyyu */
 ];
 
-document.write(images.map((img, i) => `
-<div class="card" onclick="openImage('${img}')">
-<img src="${img}">
-<p>Card ${i+1}</p>
-</div>
-`).join(""));
-</script>
+/* AUTO CREATE CARDS */
+let gallery = document.getElementById("gallery");
 
-</div>
+images.forEach((img,i)=>{
+  gallery.innerHTML += `
+  <div class="card">
+    <span class="like" onclick="sendWhatsApp(event,'Card ${i+1}')">🤍</span>
+    <img src="${img}" onclick="openImage('${img}')">
+  </div>`;
+});
 
-<!-- VIEWER -->
-<div class="viewer" id="viewer">
-<span class="closeBtn" onclick="closeImage()">✖</span>
-<img id="viewerImg">
-</div>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/917012485280" target="_blank">
-Order Now
-</a>
-
-<script>
-function openImage(src) {
-    document.getElementById("viewer").style.display = "flex";
-    document.getElementById("viewerImg").src = src;
+/* LIKE + WHATSAPP */
+function sendWhatsApp(e,name){
+  e.stopPropagation();
+  e.target.innerText="❤️";
+  let msg="Hi, I liked "+name+" card. Please send details.";
+  window.open("https://wa.me/917012485280?text="+encodeURIComponent(msg));
 }
 
-function closeImage() {
-    document.getElementById("viewer").style.display = "none";
+/* VIEW IMAGE */
+function openImage(src){
+  document.getElementById("viewer").style.display="flex";
+  document.getElementById("viewerImg").src=src;
 }
+function closeImage(){
+  document.getElementById("viewer").style.display="none";
+}
+
 </script>
 
 </body>
 </html>
-      
  
