@@ -1,146 +1,177 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-  <title>Snow White Wedding Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snow White Wedding Cards</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(to bottom, #000000, #1a1a1a);
-      color: white;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+    color: white;
+}
 
-    header {
-      text-align: center;
-      padding: 20px;
-    }
+/* HEADER */
+header {
+    text-align: center;
+    padding: 30px 10px;
+}
 
-    header img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid white;
-    }
+header img {
+    width: 90px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
 
-    h1 {
-      margin: 10px 0 5px;
-    }
+header h1 {
+    margin: 10px 0 5px;
+    font-size: 26px;
+}
 
-    .info {
-      font-size: 14px;
-      color: #ccc;
-    }
+header p {
+    color: #aaa;
+}
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      padding: 15px;
-    }
+/* GRID */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
 
-    .card {
-      background: #111;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: 0.3s;
-      cursor: pointer;
-    }
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
 
-    .card:hover {
-      transform: scale(1.05);
-    }
+.card:hover {
+    transform: scale(1.05);
+}
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
 
-    .card p {
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-    }
+.card p {
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+}
 
-    .viewer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
+/* VIEWER */
+.viewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-    .viewer img {
-      max-width: 90%;
-      max-height: 90%;
-    }
-  </style>
+.viewer img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+/* CLOSE BUTTON */
+.closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 12px 18px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+</style>
+
 </head>
 
 <body>
 
 <header>
-  <!-- Profile image -->
-  <img src="pic.png">
-
-  <h1>Snow White Wedding Cards</h1>
-  <div class="info">Wedding Cards | Kallambalam</div>
-  <div class="info">📞 +91 7012485280</div>
+    <img src="pic.png">
+    <h1>Snow White Wedding Cards</h1>
+    <p>Kallambalam | 📞 +91 7012485280</p>
 </header>
 
 <div class="container">
-<div class="card" onclick="openImage('IMG-20260424-WA0003.jpg')">
-  <img src="IMG-20260424-WA0003.jpg">
-  <p>Card 1</p>
-</div>
 
-<div class="card" onclick="openImage('IMG-20260424-WA0024.jpg')">
-  <img src="IMG-20260424-WA0024.jpg">
-  <p>Card 2</p>
-</div>
+<!-- IMAGES -->
+<script>
+const images = [
+"IMG-20260424-WA0003.jpg",
+"IMG-20260424-WA0004.jpg",
+"IMG-20260424-WA0005.jpg",
+"IMG-20260424-WA0007.jpg",
+"IMG-20260424-WA0010.jpg",
+"IMG-20260424-WA0013.jpg",
+"IMG-20260424-WA0018.jpg",
+"IMG-20260424-WA0020.jpg",
+"IMG-20260424-WA0021.jpg",
+"IMG-20260424-WA0024.jpg",
+"IMG-20260424-WA0027.jpg"
+];
 
-<div class="card" onclick="openImage('IMG-20260424-WA0007.jpg')">
-  <img src="IMG-20260424-WA0007.jpg">
-  <p>Card 3</p>
+document.write(images.map((img, i) => `
+<div class="card" onclick="openImage('${img}')">
+<img src="${img}">
+<p>Card ${i+1}</p>
 </div>
-
-<div class="card" onclick="openImage('IMG-20260424-WA0005.jpg')">
-  <img src="IMG-20260424-WA0005.jpg">
-  <p>Card 4</p>
-</div>
-
-<div class="card" onclick="openImage('IMG-20260424-WA0006.jpg')">
-  <img src="IMG-20260424-WA0006.jpg">
-  <p>Card 5</p>
-</div>
-
-<div class="card" onclick="openImage('IMG-20260424-WA0008.jpg')">
-  <img src="IMG-20260424-WA0008.jpg">
-  <p>Card 6</p>
-</div>
+`).join(""));
+</script>
 
 </div>
 
-<div class="viewer" id="viewer" onclick="closeImage()">
-  <img id="viewerImg">
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+<span class="closeBtn" onclick="closeImage()">✖</span>
+<img id="viewerImg">
 </div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/917012485280" target="_blank">
+Order Now
+</a>
 
 <script>
-  function openImage(src) {
+function openImage(src) {
     document.getElementById("viewer").style.display = "flex";
     document.getElementById("viewerImg").src = src;
-  }
+}
 
-  function closeImage() {
+function closeImage() {
     document.getElementById("viewer").style.display = "none";
-  }
+}
 </script>
 
 </body>
 </html>
+      
+ 
